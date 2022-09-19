@@ -1,17 +1,9 @@
 spring:
-  datasource:
-    name: plateassistant
-    url: jdbc:mysql://10.10.3.1/teambiller
-    username: root
-    password:
-    driver-class-name: com.mysql.cj.jdbc.Driver
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/test
 
-mybatis-plus:
-  configuration:
-    map-underscore-to-camel-case: false
-  global-config:
-    db-config:
-      column-format: "`%s`"
+
 server:
   servlet:
     session:

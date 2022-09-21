@@ -9,11 +9,11 @@ import javax.annotation.Resource;
 @Configuration
 public class MyMvcConfig implements WebMvcConfigurer {
     @Resource
-    private TokenInterceptor tokenInterceptor;
+    private LoginInterceptor loginInterceptor;
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(tokenInterceptor)
+        registry.addInterceptor(loginInterceptor)
                 .addPathPatterns("/api/**")
                 .excludePathPatterns("/api/sendSMS")
                 .excludePathPatterns("/api/signOrRegister");

@@ -3,6 +3,7 @@ package cc.ankin.teambiller.server.utils;
 import cc.ankin.teambiller.server.dto.ResponseDto;
 import cc.ankin.teambiller.server.service.ResponseService;
 import cc.ankin.teambiller.server.utils.exception.FailureLoginException;
+import cc.ankin.teambiller.server.utils.exception.NeedLoginException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -23,15 +24,19 @@ public class GlobalExceptionHandler {
     }
 
     @ExceptionHandler(RuntimeException.class)
-    public ResponseDto handleRuntimeException(RuntimeException e) {
+    public ResponseDto handleRuntimeException(Exception e) {
         e.printStackTrace();
         return responseService.newResponseServerException(e);
     }
 
     @ExceptionHandler(FailureLoginException.class)
-    public ResponseDto failureLoginException(RuntimeException e) {
-        e.printStackTrace();
+    public ResponseDto failureLoginException(Exception e) {
         return responseService.failureLogin(e);
+    }
+
+    @ExceptionHandler(NeedLoginException.class)
+    public ResponseDto needLoginException(Exception e) {
+        return responseService.needLogin(e);
     }
 
 //    @ResponseBody

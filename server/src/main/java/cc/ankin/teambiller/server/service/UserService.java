@@ -19,8 +19,12 @@ public class UserService {
     }
 
     public Boolean checkPassword(String email, String password) {
-        User user = mongoTemplate.findOne(new Query().addCriteria(Criteria.where("email").is(email)), User.class);
+        User user = getUserByEmail(email);
         return user != null && user.password.equals(password);
+    }
+
+    public User getUserByEmail(String email) {
+        return mongoTemplate.findOne(new Query().addCriteria(Criteria.where("email").is(email)), User.class);
     }
 
 }

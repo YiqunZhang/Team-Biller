@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 public class ResponseService {
 
     // 0 Ok
-    public ResponseDto ok(Object obj) {
+    public static ResponseDto ok(Object obj) {
         ResponseDto responseDto = new ResponseDto();
         responseDto.code = 0;
         responseDto.obj = obj;
@@ -17,7 +17,7 @@ public class ResponseService {
     }
 
     // 1 NeedLogin
-    public ResponseDto needLogin(Exception e) {
+    public static ResponseDto needLogin(Exception e) {
         ResponseDto responseDto = new ResponseDto();
         responseDto.code = 1;
         responseDto.message = "需要登录";
@@ -26,7 +26,7 @@ public class ResponseService {
     }
 
     // 2 NoPermission
-    public ResponseDto noPermission(Exception e) {
+    public static ResponseDto noPermission(Exception e) {
         ResponseDto responseDto = new ResponseDto();
         responseDto.code = 2;
         responseDto.message = "没有权限";
@@ -34,7 +34,7 @@ public class ResponseService {
     }
 
     // 3 FailureLogin
-    public ResponseDto failureLogin(Exception e) {
+    public static ResponseDto failureLogin(Exception e) {
         ResponseDto responseDto = new ResponseDto();
         responseDto.code = 3;
         responseDto.message = "登录失败";
@@ -42,7 +42,7 @@ public class ResponseService {
     }
 
     // 4 Apply Invalid
-    public ResponseDto applyInvalid(Exception e) {
+    public static ResponseDto applyInvalid(Exception e) {
         ResponseDto responseDto = new ResponseDto();
         responseDto.code = 4;
         responseDto.message = "请求不合法";
@@ -50,7 +50,7 @@ public class ResponseService {
     }
 
     // 5 Logic Exception
-    public ResponseDto logicException(Exception e) {
+    public static ResponseDto logicException(Exception e) {
         ResponseDto responseDto = new ResponseDto();
         responseDto.code = 5;
         responseDto.message = "逻辑错误";
@@ -58,7 +58,7 @@ public class ResponseService {
     }
 
     // 8 Client Exception
-    public ResponseDto newResponseClientException(Exception e) {
+    public static ResponseDto newResponseClientException(Exception e) {
         ResponseDto responseDto = new ResponseDto();
         responseDto.code = 8;
         responseDto.message = "客户端错误";
@@ -66,7 +66,7 @@ public class ResponseService {
     }
 
     // 9 Exception
-    public ResponseDto newResponseServerException(Exception e) {
+    public static ResponseDto newResponseServerException(Exception e) {
         ResponseDto responseDto = new ResponseDto();
         responseDto.code = 9;
         responseDto.message = "服务器错误";

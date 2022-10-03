@@ -2,12 +2,14 @@ package cc.ankin.teambiller.server.service;
 
 import cc.ankin.teambiller.server.entity.Bill;
 import cc.ankin.teambiller.server.entity.BillDetail;
+import cc.ankin.teambiller.server.entity.User;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 @SpringBootTest
 public class BillServiceTest {
@@ -41,6 +43,16 @@ public class BillServiceTest {
         bill.billDetailList.add(billDetail);
 
         billService.create(bill);
+    }
+
+    @Test
+    public void getUnpaidBill() {
+        User user = new User();
+        user.id = "633b220fadf63843bb40ca21";
+        List<Bill> billList = billService.getUnpaidBill(user);
+        for (Bill bill : billList) {
+            System.out.println(bill.remark);
+        }
     }
 }
 

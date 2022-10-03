@@ -10,7 +10,7 @@ public class Bill {
     public Long create_time;
     public String payer_id;
     public String seller;
-    public List<BillDetail> detailList;
+    public List<BillDetail> billDetailList;
     public String remark;
     public Map<String, Integer> statusMap;
     public Integer status; // 0 已删除; 1 已创建; 2 已结算

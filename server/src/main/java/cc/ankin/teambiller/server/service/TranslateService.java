@@ -1,6 +1,7 @@
 package cc.ankin.teambiller.server.service;
 
 import cc.ankin.teambiller.server.service.SettingService;
+import cc.ankin.teambiller.server.utils.exception.ClientException;
 import com.aliyun.alimt20181012.Client;
 import com.aliyun.alimt20181012.models.TranslateGeneralRequest;
 import com.aliyun.alimt20181012.models.TranslateGeneralResponse;
@@ -17,6 +18,7 @@ public class TranslateService {
     String endpoint = "mt.aliyuncs.com";
     String sourceLanguage = "en";
     String targetLanguage = "zh";
+    Integer limit = 256; // 0 means no limit
 
     public Client createClient() throws Exception {
         String accessKeyId = settingService.getString("aliyun.accessKeyId");
@@ -27,22 +29,30 @@ public class TranslateService {
         return new Client(config);
     }
 
-    public String translate(String text) throws Exception {
-        Client client = createClient();
-        TranslateGeneralRequest request = new com.aliyun.alimt20181012.models.TranslateGeneralRequest()
-                .setFormatType("text")
-                .setSourceLanguage(sourceLanguage)
-                .setTargetLanguage(targetLanguage)
-                .setSourceText(text)
-                .setScene("general");
-        com.aliyun.teautil.models.RuntimeOptions runtime = new com.aliyun.teautil.models.RuntimeOptions();
+    public String translate(String text) throws RuntimeException {
+
         try {
+            if (text.length() > limit && limit != 0) {
+                throw new ClientException("翻译文本长度不能超过" + limit + "个字符");
+            }
+            if (text.length() == 0) {
+                throw new ClientException("翻译文本不能为空");
+            }
+
+            Client client = createClient();
+            TranslateGeneralRequest request = new com.aliyun.alimt20181012.models.TranslateGeneralRequest()
+                    .setFormatType("text")
+                    .setSourceLanguage(sourceLanguage)
+                    .setTargetLanguage(targetLanguage)
+                    .setSourceText(text)
+                    .setScene("general");
+            com.aliyun.teautil.models.RuntimeOptions runtime = new com.aliyun.teautil.models.RuntimeOptions();
+
             TranslateGeneralResponse response = client.translateGeneralWithOptions(request, runtime);
             return response.body.data.translated;
-        } catch (TeaException e) {
-            return "ERROR: " + e.message;
-        }catch (Exception e) {
-            return "ERROR: " + e.getMessage();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
+
     }
 }

@@ -1,10 +1,9 @@
-package cc.ankin.teambiller.server.service;
+package cc.ankin.teambiller.server.utils;
 
 import cc.ankin.teambiller.server.dto.ResponseDto;
 import org.springframework.stereotype.Service;
 
-@Service
-public class ResponseService {
+public class ResponseUtils {
 
     // 0 Ok
     public static ResponseDto ok(Object obj) {
@@ -49,16 +48,8 @@ public class ResponseService {
         return responseDto;
     }
 
-    // 5 Logic Exception
-    public static ResponseDto logicException(Exception e) {
-        ResponseDto responseDto = new ResponseDto();
-        responseDto.code = 5;
-        responseDto.message = "逻辑错误";
-        return responseDto;
-    }
-
     // 8 Client Exception
-    public static ResponseDto newResponseClientException(Exception e) {
+    public static ResponseDto clientException(Exception e) {
         ResponseDto responseDto = new ResponseDto();
         responseDto.code = 8;
         responseDto.message = "客户端错误";
@@ -66,7 +57,7 @@ public class ResponseService {
     }
 
     // 9 Exception
-    public static ResponseDto newResponseServerException(Exception e) {
+    public static ResponseDto serverException(Exception e) {
         ResponseDto responseDto = new ResponseDto();
         responseDto.code = 9;
         responseDto.message = "服务器错误";

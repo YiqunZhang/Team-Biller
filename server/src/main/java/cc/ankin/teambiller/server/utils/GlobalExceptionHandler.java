@@ -15,24 +15,24 @@ import javax.annotation.Resource;
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(Exception.class)
-    public ResponseDto handleException(Exception e) {
+    public ResponseDto handleException(RuntimeException e) {
         e.printStackTrace();
         return ResponseUtils.serverException(e);
     }
 
     @ExceptionHandler(RuntimeException.class)
-    public ResponseDto handleRuntimeException(Exception e) {
+    public ResponseDto handleRuntimeException(RuntimeException e) {
         e.printStackTrace();
         return ResponseUtils.serverException(e);
     }
 
     @ExceptionHandler(FailureLoginException.class)
-    public ResponseDto failureLoginException(Exception e) {
+    public ResponseDto failureLoginException(RuntimeException e) {
         return ResponseUtils.failureLogin(e);
     }
 
     @ExceptionHandler(NeedLoginException.class)
-    public ResponseDto needLoginException(Exception e) {
+    public ResponseDto needLoginException(RuntimeException e) {
         return ResponseUtils.needLogin(e);
     }
 

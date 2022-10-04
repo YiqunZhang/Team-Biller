@@ -16,7 +16,7 @@ public class ResponseUtils {
     }
 
     // 1 NeedLogin
-    public static ResponseDto needLogin(Exception e) {
+    public static ResponseDto needLogin(RuntimeException e) {
         ResponseDto responseDto = new ResponseDto();
         responseDto.code = 1;
         responseDto.message = "需要登录";
@@ -25,7 +25,7 @@ public class ResponseUtils {
     }
 
     // 2 NoPermission
-    public static ResponseDto noPermission(Exception e) {
+    public static ResponseDto noPermission(RuntimeException e) {
         ResponseDto responseDto = new ResponseDto();
         responseDto.code = 2;
         responseDto.message = "没有权限";
@@ -33,31 +33,23 @@ public class ResponseUtils {
     }
 
     // 3 FailureLogin
-    public static ResponseDto failureLogin(Exception e) {
+    public static ResponseDto failureLogin(RuntimeException e) {
         ResponseDto responseDto = new ResponseDto();
         responseDto.code = 3;
         responseDto.message = "登录失败";
         return responseDto;
     }
 
-    // 4 Apply Invalid
-    public static ResponseDto applyInvalid(Exception e) {
-        ResponseDto responseDto = new ResponseDto();
-        responseDto.code = 4;
-        responseDto.message = "请求不合法";
-        return responseDto;
-    }
-
     // 8 Client Exception
-    public static ResponseDto clientException(Exception e) {
+    public static ResponseDto clientException(RuntimeException e) {
         ResponseDto responseDto = new ResponseDto();
         responseDto.code = 8;
-        responseDto.message = "客户端错误";
+        responseDto.message = e.getMessage();
         return responseDto;
     }
 
     // 9 Exception
-    public static ResponseDto serverException(Exception e) {
+    public static ResponseDto serverException(RuntimeException e) {
         ResponseDto responseDto = new ResponseDto();
         responseDto.code = 9;
         responseDto.message = "服务器错误";

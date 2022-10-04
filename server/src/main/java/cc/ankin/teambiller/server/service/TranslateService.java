@@ -29,22 +29,21 @@ public class TranslateService {
         return new Client(config);
     }
 
-    public String translate(String text) throws RuntimeException {
+    public String translate(String source) throws RuntimeException {
+        if (source.length() > limit && limit != 0) {
+            throw new ClientException("翻译文本长度不能超过" + limit + "个字符");
+        }
+        if (source.length() == 0) {
+            throw new ClientException("翻译文本不能为空");
+        }
 
         try {
-            if (text.length() > limit && limit != 0) {
-                throw new ClientException("翻译文本长度不能超过" + limit + "个字符");
-            }
-            if (text.length() == 0) {
-                throw new ClientException("翻译文本不能为空");
-            }
-
             Client client = createClient();
             TranslateGeneralRequest request = new com.aliyun.alimt20181012.models.TranslateGeneralRequest()
                     .setFormatType("text")
                     .setSourceLanguage(sourceLanguage)
                     .setTargetLanguage(targetLanguage)
-                    .setSourceText(text)
+                    .setSourceText(source)
                     .setScene("general");
             com.aliyun.teautil.models.RuntimeOptions runtime = new com.aliyun.teautil.models.RuntimeOptions();
 

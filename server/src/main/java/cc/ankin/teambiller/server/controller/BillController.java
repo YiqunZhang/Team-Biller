@@ -22,9 +22,18 @@ public class BillController {
     @RequestMapping("/getUnpaidBill")
     public ResponseDto getUnpaidBill(@RequestHeader("email") String email) {
         User user = userService.getUserByEmail(email);
-        Object obj = billService.getUnpaidBill(user);
+        Object obj = billService.getUnpaidBillByUser(user);
         return ResponseService.ok(obj);
     }
+
+    @RequestMapping("/getBillListByUser")
+    public ResponseDto getBillListByUser(@RequestHeader("email") String email) {
+        User user = userService.getUserByEmail(email);
+        Object obj = billService.getBillListByUser(user);
+        return ResponseService.ok(obj);
+    }
+
+
 
 
 

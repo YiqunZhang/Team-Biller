@@ -12,6 +12,6 @@ public class Bill {
     public String seller;
     public List<BillDetail> billDetailList;
     public String remark;
-    public Map<String, Integer> statusMap;
-    public Integer status; // 0 已删除; 1 已创建; 2 已结算
+    public Map<String, Integer> statusMap; // 0 已删除; 1 已取消无需支付; 2 待支付; 3 收款人已拒绝; 4 已支付待确认; 5 收款人确认已完成;
+    public Integer status; // 0 已删除; 1 未完成; 2 已完成
 }

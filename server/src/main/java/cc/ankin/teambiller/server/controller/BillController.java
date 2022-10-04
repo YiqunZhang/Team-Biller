@@ -3,7 +3,7 @@ package cc.ankin.teambiller.server.controller;
 import cc.ankin.teambiller.server.dto.ResponseDto;
 import cc.ankin.teambiller.server.entity.User;
 import cc.ankin.teambiller.server.service.BillService;
-import cc.ankin.teambiller.server.service.ResponseService;
+import cc.ankin.teambiller.server.utils.ResponseUtils;
 import cc.ankin.teambiller.server.service.UserService;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,14 +23,14 @@ public class BillController {
     public ResponseDto getUnpaidBill(@RequestHeader("email") String email) {
         User user = userService.getUserByEmail(email);
         Object obj = billService.getUnpaidBillByUser(user);
-        return ResponseService.ok(obj);
+        return ResponseUtils.ok(obj);
     }
 
     @RequestMapping("/getBillListByUser")
     public ResponseDto getBillListByUser(@RequestHeader("email") String email) {
         User user = userService.getUserByEmail(email);
         Object obj = billService.getBillListByUser(user);
-        return ResponseService.ok(obj);
+        return ResponseUtils.ok(obj);
     }
 
 

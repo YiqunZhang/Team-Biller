@@ -5,13 +5,15 @@ import cc.ankin.teambiller.server.entity.User;
 import cc.ankin.teambiller.server.service.BillService;
 import cc.ankin.teambiller.server.utils.ResponseUtils;
 import cc.ankin.teambiller.server.service.UserService;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.List;
 
-@RestController("bill")
+@RestController()
 @RequestMapping("/api/bill")
 public class BillController {
     @Resource
@@ -19,19 +21,13 @@ public class BillController {
     @Resource
     BillService billService;
 
-    @RequestMapping("/getUnpaidBill")
-    public ResponseDto getUnpaidBill(@RequestHeader("email") String email) {
+    @RequestMapping("/getBillListByUser")
+    public ResponseDto getUnpaidBill(@RequestHeader("email") String email, @RequestBody List<Integer> statusList) {
         User user = userService.getUserByEmail(email);
-        Object obj = billService.getUnpaidBillByUser(user);
+        Object obj = billService.getBillListByUser(user, statusList);
         return ResponseUtils.ok(obj);
     }
 
-    @RequestMapping("/getBillListByUser")
-    public ResponseDto getBillListByUser(@RequestHeader("email") String email) {
-        User user = userService.getUserByEmail(email);
-        Object obj = billService.getBillListByUser(user);
-        return ResponseUtils.ok(obj);
-    }
 
 
 

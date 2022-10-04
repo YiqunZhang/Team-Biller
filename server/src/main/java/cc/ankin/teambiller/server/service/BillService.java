@@ -30,18 +30,16 @@ public class BillService {
         mongoTemplate.save(bill);
         return bill;
     }
-
-    public List<Bill> getUnpaidBillByUser(User user) {
+    // 0 已删除; 1 已取消无需支付; 2 待支付; 3 收款人已拒绝; 4 已支付待确认; 5 收款人确认已完成;
+    public List<Bill> getBillListByUser(User user, List<Integer> statusList) {
         Query query = new Query();
-        query.addCriteria(Criteria.where("statusMap." + user.id).is(1));
-        query.with(Sort.by(Sort.Order.desc("create_time")));
 
-        return mongoTemplate.find(query, Bill.class);
-    }
+        if (statusList != null && statusList.size() > 0) {
+            query.addCriteria(Criteria.where("status").in(statusList));
+        }else {
+            query.addCriteria(Criteria.where("status").ne(0));
+        }
 
-    public List<Bill> getBillListByUser(User user) {
-        Query query = new Query();
-        query.addCriteria(Criteria.where("statusMap." + user.id).exists(true));
         query.with(Sort.by(Sort.Order.desc("create_time")));
 
         return mongoTemplate.find(query, Bill.class);

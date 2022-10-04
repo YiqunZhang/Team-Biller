@@ -45,14 +45,6 @@ public class BillServiceTest {
         billService.create(bill);
     }
 
-    @Test
-    public void getUnpaidBill() {
-        User user = new User();
-        user.id = "633b220fadf63843bb40ca21";
-        List<Bill> billList = billService.getUnpaidBillByUser(user);
-        for (Bill bill : billList) {
-            System.out.println(bill.remark);
-        }
-    }
+
 }
 

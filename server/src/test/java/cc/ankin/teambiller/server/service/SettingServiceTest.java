@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.annotation.Resource;
+import java.util.TimeZone;
 
 @SpringBootTest
 public class SettingServiceTest {
@@ -13,7 +14,7 @@ public class SettingServiceTest {
 
     @Test
     public void add() {
-        settingService.add("aliyun.accessKeySecret", "test");
+        settingService.add("timeZone", "GMT+8:00");
     }
 
     @Test

@@ -12,4 +12,5 @@ public class User implements Serializable {
     public String name;
     public String email;
     public String password;
+    public Integer autoConfirm; // 0: 不自动确认收款; 1: 自动确认收款
 }
